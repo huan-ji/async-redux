@@ -1,0 +1,21 @@
+{
+  "name": "async-redux",
+  "version": "1.0.0",
+  "description": "Create async redux actions and reducers with one liners, perfect for interacting with RESTful API",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "keywords": [
+    "redux",
+    "async",
+    "fetch"
+  ],
+  "author": "Huan Ji",
+  "license": "ISC",
+  "dependencies": {
+    "fetch": "^1.1.0",
+    "lodash.camelcase": "^4.3.0",
+    "query-string": "^5.1.0"
+  }
+}

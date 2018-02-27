@@ -1,8 +1,16 @@
 {
   "name": "async-redux-generators",
-  "version": "1.0.5",
+  "version": "1.0.4",
   "description": "Create async redux actions and reducers with one liners, perfect for interacting with RESTful API",
-  "main": "index.js",
+  "main": "dist/index.js",
+  "scripts": {
+    "build": "babel src --out-dir dist"
+  },
+  "devDependencies": {
+    "babel-cli": "^6.7.7",
+    "babel-core": "^6.7.7",
+    "babel-preset-es2015": "^6.6.0"
+  },
   "repository": {
     "type": "git",
     "url": "https://github.com/huan-ji/async-redux-generators.git"

@@ -73,11 +73,12 @@ const asyncReducer = actionName => (state, action) => {
   }
 };
 
-const asyncGenerators = (actionName, url, asyncFunction) =>
-  {
+const asyncGenerators = (actionName, url, asyncFunction) => {
+  return {
     asyncAction: asyncAction(actionName, url, asyncFunction),
     asyncReducer: asyncReducer(actionName)
-  }
+  };
+};
 
 export {
   asyncAction,

@@ -1,4 +1,4 @@
-async-redux
+async-redux-generators
 =============
 
 Generators for async [RSA](https://github.com/kolodny/redux-standard-action)-compliant actions, and corresponding reducers. Generates three actions and three reducers for REQUESTED, RECEIVED, and FAILED state. Generators assume RESTful API and generates with certain conventions.
@@ -9,7 +9,7 @@ Reducer will activate loading and error states under camelCase names such as fet
 ## Install
 
 ```js
-npm install --save async-redux
+npm install --save async-redux-generators
 ```
 
 ## Usage

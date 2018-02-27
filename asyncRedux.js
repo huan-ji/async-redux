@@ -1,16 +1,28 @@
 import camelCase from 'lodash.camelcase';
 
-exports.asyncAction = (actionName, url, asyncFunction) => ({ id, params }) => {
+exports.asyncAction = (actionName, url, asyncFunction) => (meta) => {
   return (dispatch) => {
     let transformedUrl = url;
-    if (id) {
-      transformedUrl = `${url}/${id}`;
+
+    // This assumes RESTful API
+    if (meta.id) {
+      transformedUrl = `${url}/${meta.id}`;
     }
 
-    dispatch({ type: `${actionName}_REQUESTED`, id, params });
-    return asyncFunction(transformedUrl, params)
-      .then(result => dispatch({ type: `${actionName}_RECEIVED`, id, result }))
-      .catch(errors => Promise.reject(dispatch({ type: `${actionName}_FAILED`, id, errors })));
+    dispatch({ type: `${actionName}_REQUESTED`, meta });
+
+    return asyncFunction(transformedUrl, meta)
+      .then(payload => dispatch({
+        type: `${actionName}_RECEIVED`,
+        meta,
+        payload
+      }))
+      .catch(payload => dispatch({
+        type: `${actionName}_FAILED`,
+        meta,
+        payload: Promise.reject(payload),
+        error: true
+      }));
   };
 };
 
@@ -38,10 +50,10 @@ exports.asyncReducer = actionName => (state, action) => {
       newState[loadingStateName] = false;
       newState.loading = false;
 
-      if (action.result instanceof Array) {
-        action.result.forEach(item => (newState.data[item.id] = item));
+      if (action.payload instanceof Array) {
+        action.payload.forEach(item => (newState.data[item.id] = item));
       } else {
-        newState.data[action.id] = action.result;
+        newState.data[action.meta.id] = action.payload;
       }
       newState[errorStateName] = { errors: '' };
 
@@ -51,7 +63,7 @@ exports.asyncReducer = actionName => (state, action) => {
     case `${actionName}_FAILED`: {
       newState[loadingStateName] = false;
       newState.loading = false;
-      newState[errorStateName] = action.errors;
+      newState[errorStateName] = action.payload;
 
       return Object.assign({}, state, newState);
     }

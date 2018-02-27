@@ -16,11 +16,11 @@ const request = (type, url, data, options) => {
 
   return fetch(url, Object.assign({}, defaultOptions, options))
     .then((response) => {
-      return response.json().then((result) => {
+      return response.json().then((payload) => {
         if (response.ok) {
-          return Promise.resolve(result);
+          return Promise.resolve(payload);
         } else {
-          return Promise.reject(Object.assign({}, { status: response.status }, result));
+          return Promise.reject(Object.assign({}, { status: response.status }, payload));
         }
       });
     });

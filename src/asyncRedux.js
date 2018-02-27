@@ -17,12 +17,12 @@ const asyncAction = (actionName, url, asyncFunction) => (meta) => {
         meta,
         payload
       }))
-      .catch(payload => dispatch({
+      .catch(payload => Promise.reject(dispatch({
         type: `${actionName}_FAILED`,
         meta,
-        payload: Promise.reject(payload),
+        payload,
         error: true
-      }));
+      })));
   };
 };
 

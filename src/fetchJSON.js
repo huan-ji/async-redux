@@ -1,4 +1,4 @@
-import { fetch } from 'fetch';
+import 'whatwg-fetch';
 import queryString from 'query-string';
 
 const request = (type, url, data, options) => {

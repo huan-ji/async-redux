@@ -15,7 +15,7 @@ npm install --save async-redux-generators
 ## Usage
 
 ```js
-import { createStore, applyMiddleware, combineReducers, compose } from 'redux';
+import { createStore, applyMiddleware, compose } from 'redux';
 import thunk from 'redux-thunk';
 
 import { asyncAction, fetchJSON, asyncReducer } from 'async-redux';

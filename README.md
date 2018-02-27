@@ -18,7 +18,7 @@ npm install --save async-redux-generators
 import { createStore, applyMiddleware, compose } from 'redux';
 import thunk from 'redux-thunk';
 
-import { asyncAction, fetchJSON, asyncReducer } from 'async-redux';
+import { asyncAction, fetchJSON, asyncReducer } from 'async-redux-generators';
 
 const albumAction = asyncAction('FETCH_ALBUM', 'http://localhost:5000/albums', fetchJSON.get);
 const albumReducer = asyncReducer('FETCH_ALBUM');

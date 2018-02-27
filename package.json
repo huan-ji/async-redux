@@ -1,6 +1,6 @@
 {
   "name": "async-redux-generators",
-  "version": "1.0.1",
+  "version": "1.0.2",
   "description": "Create async redux actions and reducers with one liners, perfect for interacting with RESTful API",
   "main": "index.js",
   "scripts": {

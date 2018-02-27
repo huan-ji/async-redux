@@ -1,6 +1,6 @@
 import camelCase from 'lodash.camelcase';
 
-exports.asyncAction = (actionName, url, asyncFunction) => (meta) => {
+const asyncAction = (actionName, url, asyncFunction) => (meta) => {
   return (dispatch) => {
     let transformedUrl = url;
 
@@ -26,7 +26,7 @@ exports.asyncAction = (actionName, url, asyncFunction) => (meta) => {
   };
 };
 
-exports.asyncReducer = actionName => (state, action) => {
+const asyncReducer = actionName => (state, action) => {
   const camelCaseActionName = camelCase(actionName);
   const loadingStateName = `${camelCaseActionName}Loading`;
   const errorStateName = `${camelCaseActionName}Error`;
@@ -72,3 +72,15 @@ exports.asyncReducer = actionName => (state, action) => {
       return newState;
   }
 };
+
+const asyncGenerators = (actionName, url, asyncFunction) =>
+  {
+    asyncAction: asyncAction(actionName, url, asyncFunction),
+    asyncReducer: asyncReducer(actionName)
+  }
+
+export {
+  asyncAction,
+  asyncReducer,
+  asyncGenerators
+}

@@ -18,10 +18,21 @@ npm install --save async-redux-generators
 import { createStore, applyMiddleware, compose } from 'redux';
 import thunk from 'redux-thunk';
 
-import { asyncAction, fetchJSON, asyncReducer } from 'async-redux-generators';
+// fetchJSON is a wrapper around standard fetch that formats response and header/body to JSON
+// Contains actions get, post, put, patch, and delete
+import { asyncAction, fetchJSON, asyncReducer, asyncGenerators } from 'async-redux-generators';
 
-const albumAction = asyncAction('FETCH_ALBUM', 'http://localhost:5000/albums', fetchJSON.get);
+// asyncAction(actionName, url, fetchFunction)
+const fetchAlbumAction = asyncAction('FETCH_ALBUM', 'http://localhost:5000/albums', fetchJSON.get);
+// asyncReducer(actionName)
 const albumReducer = asyncReducer('FETCH_ALBUM');
+// OR
+// asyncGenerators(actionName, url, fetchFunction)
+const { fetchAlbumAction, albumReducer } = asyncGenerators(
+  'FETCH_ALBUM',
+  'http://localhost:5000/albums',
+  fetchJSON.get
+)
 
 const store = createStore(
   albumReducer,
@@ -30,17 +41,22 @@ const store = createStore(
   )
 );
 
-loadAlbumAction({ id: 5 });
-// while loading
+// generatedAsyncAction(metaData)
+fetchAlbumAction({ id: 5 });// If id is provided in metaData, it will be appended to the url (url/id)
+
+// Dispatch FETCH_ALBUM_REQUESTED
+// Runs async function to fetch album
 // store.loading = true
 // store.fetchAlbumLoading = true
 
-// after loading
+// Done fetching
+// Dispatch FETCH_ALBUM_RECEIVED
 // store.loading = false
 // store.fetchAlbumLoading = false
 // album with id of 5 will appear in the store
 
-// error occurs
+// Error Occurs
+// Dispatch FETCH_ALBUM_FAILED
 // store.loading = false
 // store.fetchAlbumLoading = false
 // store.fetchAlbumError = Error Object

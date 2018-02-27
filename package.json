@@ -1,5 +1,5 @@
 {
-  "name": "async-redux",
+  "name": "async-redux-generators",
   "version": "1.0.0",
   "description": "Create async redux actions and reducers with one liners, perfect for interacting with RESTful API",
   "main": "index.js",
@@ -13,7 +13,8 @@
   "keywords": [
     "redux",
     "async",
-    "fetch"
+    "fetch",
+    "generators"
   ],
   "author": "Huan Ji",
   "license": "ISC",

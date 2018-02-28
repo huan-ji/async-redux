@@ -1,7 +1,7 @@
 async-redux-generators
 =============
 
-Generators for async [RSA](https://github.com/kolodny/redux-standard-action)-compliant actions, and corresponding reducers. Generates three actions and three reducers for REQUESTED, RECEIVED, and FAILED state. Generators assume RESTful API and generates with certain conventions.
+Generators for async [FSA](https://github.com/redux-utilities/flux-standard-action)-compliant actions, and corresponding reducers. Generates three actions and three reducers for REQUESTED, RECEIVED, and FAILED state. Generators assume RESTful API and generates with certain conventions.
 
 Reducer will activate loading and error states under camelCase names such as fetchAlbumLoading and fetchAlbumError. The entire store will also have loading state activated, see below for example.
 
